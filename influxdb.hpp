@@ -74,6 +74,10 @@ namespace influxdb_cpp {
             lines_.clear();
             return _m(m);
         }
+
+        std::string to_string() const {
+            return lines_;
+        }
     protected:
         detail::tag_caller& _m(const std::string& m) {
             _escape(m, ", ");
