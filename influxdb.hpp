@@ -88,7 +88,7 @@ struct builder {
     return _m(m);
   }
 
-  std::string to_string() const { return lines_; }
+  std::string to_string() const { return lines_.str(); }
 
 protected:
   detail::tag_caller &_m(const std::string &m) {
@@ -353,21 +353,24 @@ inline int inner::http_request(const char *method, const char *uri,
     switch (_GET_NEXT_CHAR()) {
     case 'C':
       _('o')
-      _('n') _('t') _('e') _('n') _('t') _('-') _('L') _('e') _('n') _('g')
-          _('t') _('h') _(':') _(' ') _GET_NUMBER(content_length) break;
+      _('n')
+      _('t') _('e') _('n') _('t') _('-') _('L') _('e') _('n') _('g') _('t')
+          _('h') _(':') _(' ') _GET_NUMBER(content_length) break;
     case 'T':
       _('r')
-      _('a') _('n') _('s') _('f') _('e') _('r') _('-') _('E') _('n') _('c')
-          _('o') _('d') _('i') _('n') _('g') _(':') _(' ') _('c') _('h') _('u')
-              _('n') _('k') _('e') _('d') chunked = 1;
+      _('a')
+      _('n') _('s') _('f') _('e') _('r') _('-') _('E') _('n') _('c') _('o')
+          _('d') _('i') _('n') _('g') _(':') _(' ') _('c') _('h') _('u') _('n')
+              _('k') _('e') _('d') chunked = 1;
       break;
     case '\r':
       __('\n')
       switch (chunked) {
         do {
           __('\r')
-          __('\n') case 1 : _GET_CHUNKED_LEN(content_length, '\r')
-                                __('\n') if (!content_length) {
+          __('\n')
+          case 1 : _GET_CHUNKED_LEN(content_length, '\r')
+                       __('\n') if (!content_length) {
             __('\r') __('\n') goto END;
           }
         case 0:
